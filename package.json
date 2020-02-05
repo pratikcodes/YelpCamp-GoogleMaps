@@ -1,87 +1,91 @@
 {
-  "_from": "assert-plus@^1.0.0",
-  "_id": "assert-plus@1.0.0",
+  "_from": "asynckit@^0.4.0",
+  "_id": "asynckit@0.4.0",
   "_inBundle": false,
-  "_integrity": "sha1-8S4PPF13sLHN2RRpQuTpbB5N1SU=",
-  "_location": "/assert-plus",
+  "_integrity": "sha1-x57Zf380y48robyXkLzDZkdLS3k=",
+  "_location": "/asynckit",
   "_phantomChildren": {},
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "assert-plus@^1.0.0",
-    "name": "assert-plus",
-    "escapedName": "assert-plus",
-    "rawSpec": "^1.0.0",
+    "raw": "asynckit@^0.4.0",
+    "name": "asynckit",
+    "escapedName": "asynckit",
+    "rawSpec": "^0.4.0",
     "saveSpec": null,
-    "fetchSpec": "^1.0.0"
+    "fetchSpec": "^0.4.0"
   },
   "_requiredBy": [
-    "/dashdash",
-    "/getpass",
-    "/http-signature",
-    "/jsprim",
-    "/sshpk",
-    "/verror"
+    "/form-data"
   ],
-  "_resolved": "https://registry.npmjs.org/assert-plus/-/assert-plus-1.0.0.tgz",
-  "_shasum": "f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525",
-  "_spec": "assert-plus@^1.0.0",
-  "_where": "C:\\Users\\user\\webdevbootcamp\\YelpCamp\\v11\\node_modules\\http-signature",
+  "_resolved": "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz",
+  "_shasum": "c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79",
+  "_spec": "asynckit@^0.4.0",
+  "_where": "C:\\Users\\user\\webdevbootcamp\\YelpCamp\\v11\\node_modules\\form-data",
   "author": {
-    "name": "Mark Cavage",
-    "email": "mcavage@gmail.com"
+    "name": "Alex Indigo",
+    "email": "iam@alexindigo.com"
   },
   "bugs": {
-    "url": "https://github.com/mcavage/node-assert-plus/issues"
+    "url": "https://github.com/alexindigo/asynckit/issues"
   },
   "bundleDependencies": false,
-  "contributors": [
-    {
-      "name": "Dave Eddy",
-      "email": "dave@daveeddy.com"
-    },
-    {
-      "name": "Fred Kuo",
-      "email": "fred.kuo@joyent.com"
-    },
-    {
-      "name": "Lars-Magnus Skog",
-      "email": "ralphtheninja@riseup.net"
-    },
-    {
-      "name": "Mark Cavage",
-      "email": "mcavage@gmail.com"
-    },
-    {
-      "name": "Patrick Mooney",
-      "email": "pmooney@pfmooney.com"
-    },
-    {
-      "name": "Rob Gulewich",
-      "email": "robert.gulewich@joyent.com"
-    }
-  ],
   "dependencies": {},
   "deprecated": false,
-  "description": "Extra assertions on top of node's assert module",
+  "description": "Minimal async jobs utility library, with streams support",
   "devDependencies": {
-    "faucet": "0.0.1",
-    "tape": "4.2.2"
+    "browserify": "^13.0.0",
+    "browserify-istanbul": "^2.0.0",
+    "coveralls": "^2.11.9",
+    "eslint": "^2.9.0",
+    "istanbul": "^0.4.3",
+    "obake": "^0.1.2",
+    "phantomjs-prebuilt": "^2.1.7",
+    "pre-commit": "^1.1.3",
+    "reamde": "^1.1.0",
+    "rimraf": "^2.5.2",
+    "size-table": "^0.2.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.5.1"
   },
-  "engines": {
-    "node": ">=0.8"
-  },
-  "homepage": "https://github.com/mcavage/node-assert-plus#readme",
+  "homepage": "https://github.com/alexindigo/asynckit#readme",
+  "keywords": [
+    "async",
+    "jobs",
+    "parallel",
+    "serial",
+    "iterator",
+    "array",
+    "object",
+    "stream",
+    "destroy",
+    "terminate",
+    "abort"
+  ],
   "license": "MIT",
-  "main": "./assert.js",
-  "name": "assert-plus",
-  "optionalDependencies": {},
+  "main": "index.js",
+  "name": "asynckit",
+  "pre-commit": [
+    "clean",
+    "lint",
+    "test",
+    "browser",
+    "report",
+    "size"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mcavage/node-assert-plus.git"
+    "url": "git+https://github.com/alexindigo/asynckit.git"
   },
   "scripts": {
-    "test": "tape tests/*.js | ./node_modules/.bin/faucet"
+    "browser": "browserify -t browserify-istanbul test/lib/browserify_adjustment.js test/test-*.js | obake --coverage | tap-spec",
+    "clean": "rimraf coverage",
+    "debug": "tape test/test-*.js",
+    "lint": "eslint *.js lib/*.js test/*.js",
+    "report": "istanbul report",
+    "size": "browserify index.js | size-table asynckit",
+    "test": "istanbul cover --reporter=json tape -- 'test/test-*.js' | tap-spec",
+    "win-test": "tape test/test-*.js"
   },
-  "version": "1.0.0"
+  "version": "0.4.0"
 }
