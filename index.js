@@ -1,27 +1,20 @@
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
-var errors = require('./errors');
-var types = require('./types');
+// If you have no idea what ASN.1 or BER is, see this:
+// ftp://ftp.rsa.com/pub/pkcs/ascii/layman.asc
 
-var Reader = require('./reader');
-var Writer = require('./writer');
+var Ber = require('./ber/index');
 
 
-// --- Exports
+
+// --- Exported API
 
 module.exports = {
 
-  Reader: Reader,
+  Ber: Ber,
 
-  Writer: Writer
+  BerReader: Ber.Reader,
+
+  BerWriter: Ber.Writer
 
 };
-
-for (var t in types) {
-  if (types.hasOwnProperty(t))
-    module.exports[t] = types[t];
-}
-for (var e in errors) {
-  if (errors.hasOwnProperty(e))
-    module.exports[e] = errors[e];
-}
