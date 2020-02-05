@@ -1,45 +1,63 @@
-Port of the OpenBSD `bcrypt_pbkdf` function to pure Javascript. `npm`-ified
-version of [Devi Mandiri's port](https://github.com/devi/tmp/blob/master/js/bcrypt_pbkdf.js),
-with some minor performance improvements. The code is copied verbatim (and
-un-styled) from Devi's work.
+# http-errors
 
-This product includes software developed by Niels Provos.
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Node.js Version][node-version-image]][node-version-url]
+[![Build Status][travis-image]][travis-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
+
+Create HTTP errors for Express, Koa, Connect, etc. with ease.
+
+## Example
+
+```js
+var createError = require('http-errors');
+
+app.use(function (req, res, next) {
+  if (!req.user) return next(createError(401, 'Please login to view this page.'));
+  next();
+})
+```
 
 ## API
 
-### `bcrypt_pbkdf.pbkdf(pass, passlen, salt, saltlen, key, keylen, rounds)`
+This is the current API, currently extracted from Koa and subject to change.
 
-Derive a cryptographic key of arbitrary length from a given password and salt,
-using the OpenBSD `bcrypt_pbkdf` function. This is a combination of Blowfish and
-SHA-512.
+### Error Properties
 
-See [this article](http://www.tedunangst.com/flak/post/bcrypt-pbkdf) for
-further information.
+- `message`
+- `status` and `statusCode` - the status code of the error, defaulting to `500`
 
-Parameters:
+### createError([status], [message], [properties])
 
- * `pass`, a Uint8Array of length `passlen`
- * `passlen`, an integer Number
- * `salt`, a Uint8Array of length `saltlen`
- * `saltlen`, an integer Number
- * `key`, a Uint8Array of length `keylen`, will be filled with output
- * `keylen`, an integer Number
- * `rounds`, an integer Number, number of rounds of the PBKDF to run
+```js
+var err = createError(404, 'This video does not exist!');
+```
 
-### `bcrypt_pbkdf.hash(sha2pass, sha2salt, out)`
+- `status: 500` - the status code as a number
+- `message` - the message of the error, defaulting to node's text for that status code.
+- `properties` - custom properties to attach to the object
 
-Calculate a Blowfish hash, given SHA2-512 output of a password and salt. Used as
-part of the inner round function in the PBKDF.
+### new createError\[code || name\](\[msg]\))
 
-Parameters:
+```js
+var err = new createError.NotFound();
+```
 
- * `sha2pass`, a Uint8Array of length 64
- * `sha2salt`, a Uint8Array of length 64
- * `out`, a Uint8Array of length 32, will be filled with output
+- `code` - the status code as a number
+- `name` - the name of the error as a "bumpy case", i.e. `NotFound` or `InternalServerError`.
 
 ## License
 
-This source form is a 1:1 port from the OpenBSD `blowfish.c` and `bcrypt_pbkdf.c`.
-As a result, it retains the original copyright and license. The two files are
-under slightly different (but compatible) licenses, and are here combined in
-one file. For each of the full license texts see `LICENSE`.
+[MIT](LICENSE)
+
+[npm-image]: https://img.shields.io/npm/v/http-errors.svg?style=flat
+[npm-url]: https://npmjs.org/package/http-errors
+[node-version-image]: https://img.shields.io/node/v/http-errors.svg?style=flat
+[node-version-url]: http://nodejs.org/download/
+[travis-image]: https://img.shields.io/travis/jshttp/http-errors.svg?style=flat
+[travis-url]: https://travis-ci.org/jshttp/http-errors
+[coveralls-image]: https://img.shields.io/coveralls/jshttp/http-errors.svg?style=flat
+[coveralls-url]: https://coveralls.io/r/jshttp/http-errors
+[downloads-image]: https://img.shields.io/npm/dm/http-errors.svg?style=flat
+[downloads-url]: https://npmjs.org/package/http-errors
